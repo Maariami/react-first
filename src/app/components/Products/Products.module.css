@@ -209,11 +209,18 @@
   .desc {
     height: 48px;
     width: 100%;
+  }
+  .product p {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 10em;
+    line-height: 20px;
+  }
+  .product p:last-of-type {
+    line-height: 28px;
   }
   .shopNow {
     width: 140px;

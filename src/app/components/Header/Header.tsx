@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import styles from "./Header.module.css";
+import Link from "next/link";
 
 type Props = {};
 
@@ -15,9 +16,9 @@ const Header = (props: Props) => {
         </div>
         <ul className={styles.navbar}>
           <li>
-            <a className={styles.a} href="./home.html">
+            <Link className={styles.a} href="/">
               Home
-            </a>
+            </Link>
           </li>
           <li>About</li>
           <li>Contact Us</li>
@@ -25,9 +26,9 @@ const Header = (props: Props) => {
         </ul>
         <div className={styles.profile}>
           <img src="./images/cart.png" alt="" />
-          <a href="cart.html">
+          <Link href="/Cart">
             <img src="./images/heart.png" alt="Heart Icon" />
-          </a>
+          </Link>
           <img src="./images/profile.png" alt="" />
         </div>
         <img className={styles.burger} src="./images/Burger.png" alt="" />

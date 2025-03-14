@@ -10,7 +10,7 @@ const Discount = (props: Props) => {
       <div className={clsx(styles.centered, styles.browse, styles.upped)}>
         <p>Discounts up to -50%</p>
       </div>
-      <div className={clsx(styles.prods, styles.centered)}>
+      <div className={clsx(styles.centered, styles.prods)}>
         <div className={styles.product}>
           <img className="" src="./images/cart.png" />
           <img src="./images/Iphone 14 pro 1.png" alt="" />

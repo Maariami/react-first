@@ -86,7 +86,7 @@
   letter-spacing: 1%;
 }
 .centered {
-  margin: auto;
+  margin-inline: auto;
   max-width: 1120px;
   width: 100%;
 }
@@ -172,7 +172,7 @@
   }
   .prods {
     gap: 16px;
-    margin-bottom: 112px;
+    margin-bottom: 56px;
   }
 
   .product a {
@@ -196,5 +196,21 @@
   }
   .shopNow {
     width: 140px;
+  }
+  .product p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 10em; /* Adjust based on line height */
+    line-height: 20px; /* Ensure proper spacing */
+  }
+  .product p:last-of-type {
+    line-height: 28px;
+  }
+  .browse {
+    padding-inline: 16px;
+    padding-top: 0;
   }
 }
