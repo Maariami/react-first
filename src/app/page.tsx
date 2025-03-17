@@ -4,6 +4,7 @@ import Pics from "./components/pictuesblock/pics";
 import Types from "./components/Types/Types";
 import Products from "./components/Products/Products";
 import Discount from "./components/Discount/Discount";
+import Banner from "./components/Banner/Banner";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Types></Types>
       <Products></Products>
       <Discount></Discount>
+      <Banner></Banner>
     </div>
   );
 }

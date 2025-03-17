@@ -1,0 +1,45 @@
+.saleimage {
+  background-image: url("/images/saleimg.png");
+  background-size: cover;
+  background-position: center;
+  height: 448px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.saleTexts {
+  text-align: center;
+}
+.saleButt {
+  margin-top: 40px;
+
+  gap: 8px;
+  border-radius: 6px;
+  border: 1px solid white;
+  padding: 16px 56px;
+
+  background-color: inherit;
+  color: white;
+}
+.saleHead {
+  font-weight: 100;
+  font-size: 72px;
+  line-height: 72px;
+  letter-spacing: -1%;
+  color: rgba(255, 255, 255, 1);
+}
+.saleText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0%;
+  color: rgba(120, 120, 120, 1);
+}
+@media only screen and (max-width: 1120px) {
+  .saleimage {
+    background-image: url("/images/saleimg\ small.png");
+  }
+  .saleHead {
+    font-size: 48px;
+  }
+}
