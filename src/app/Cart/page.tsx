@@ -60,7 +60,6 @@ export default function Home() {
                 <img src={item.image} alt={item.name} />
                 <div className={styles.nameId}>
                   <p className={styles.title}>{item.name}</p>
-                  <p className={styles.id}>#{item.id}</p>
                 </div>
                 <div className={styles.num}>
                   <p
