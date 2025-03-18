@@ -1,46 +1,100 @@
+"use client";
 import clsx from "clsx";
 import styles from "./page.module.css";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const [cartItems, setCartItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    console.log("useEffect triggered");
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      const parsedCart = JSON.parse(storedCart);
+      console.log("Cart Items from localStorage:", parsedCart);
+      setCartItems(parsedCart);
+    }
+  }, []);
+
+  const increaseQuantity = (id: number) => {
+    const updatedCart = cartItems.map((item) => {
+      if (item.id === id) {
+        item.quantity += 1;
+      }
+      return item;
+    });
+
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const decreaseQuantity = (id: number) => {
+    const updatedCart = cartItems
+      .map((item) => {
+        if (item.id === id) {
+          if (item.quantity > 1) {
+            item.quantity -= 1;
+          } else {
+            return null;
+          }
+        }
+        return item;
+      })
+      .filter(Boolean);
+
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  console.log("cartItems in state:", cartItems);
+
   return (
     <>
       <section className={clsx(styles.section, styles.centered)}>
         <div className={styles.shoppingCart}>
           <p>Shopping Cart</p>
 
-          <div className={styles.item}>
-            <img src="/images/Iphone 14 pro 1.png" alt="iPhone 14 Pro" />
-            <div className={styles.nameId}>
-              <p className={styles.title}>
-                Apple iPhone 14 Pro Max 128Gb Deep Purple
-              </p>
-              <p className={styles.id}>#25139526913984</p>
-            </div>
-            <div className={styles.num}>
-              <p>-</p>
-              <div className={styles.amount}>1</div>
-              <p>+</p>
-              <p>$1399</p>
-              <img src="/images/Close.png" alt="Close" />
-            </div>
-          </div>
-
-          <div className={styles.item}>
-            <img src="/images/Iphone 14 pro 1.png" alt="iPhone 14 Pro" />
-            <div className={styles.nameId}>
-              <p className={styles.title}>
-                Apple iPhone 14 Pro Max 128Gb Deep Purple
-              </p>
-              <p className={styles.id}>#25139526913984</p>
-            </div>
-            <div className={styles.num}>
-              <p>-</p>
-              <div className={styles.amount}>1</div>
-              <p>+</p>
-              <p>$1399</p>
-              <img src="/images/Close.png" alt="Close" />
-            </div>
-          </div>
+          {cartItems.length > 0 ? (
+            cartItems.map((item: any) => (
+              <div key={item.id} className={styles.item}>
+                <img src={item.image} alt={item.name} />
+                <div className={styles.nameId}>
+                  <p className={styles.title}>{item.name}</p>
+                  <p className={styles.id}>#{item.id}</p>
+                </div>
+                <div className={styles.num}>
+                  <p
+                    style={{ cursor: "pointer" }}
+                    onClick={() => decreaseQuantity(item.id)}
+                  >
+                    -
+                  </p>
+                  <div className={styles.amount}>{item.quantity}</div>
+                  <p
+                    style={{ cursor: "pointer" }}
+                    onClick={() => increaseQuantity(item.id)}
+                  >
+                    +
+                  </p>
+                  <p>${item.price}</p>
+                  <img
+                    src="/images/Close.png"
+                    alt="Close"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      const updatedCart = cartItems.filter(
+                        (i) => i.id !== item.id
+                      );
+                      setCartItems(updatedCart);
+                      localStorage.setItem("cart", JSON.stringify(updatedCart));
+                    }}
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Your cart is empty.</p>
+          )}
         </div>
 
         <div className={styles.orderSummary}>
@@ -58,7 +112,13 @@ export default function Home() {
           </div>
           <div className={styles.subtotal}>
             <p>Subtotal</p>
-            <p>$2347</p>
+            <p>
+              $
+              {cartItems.reduce(
+                (acc, item) => acc + item.price * item.quantity,
+                0
+              )}
+            </p>
           </div>
           <div className={styles.details}>
             <div className={styles.tax}>
@@ -72,7 +132,15 @@ export default function Home() {
           </div>
           <div className={styles.total}>
             <p>Total</p>
-            <p>$2426</p>
+            <p>
+              $
+              {cartItems.reduce(
+                (acc, item) => acc + item.price * item.quantity,
+                0
+              ) +
+                50 +
+                29}
+            </p>
           </div>
           <button className={styles.checkout}>Checkout</button>
         </div>
